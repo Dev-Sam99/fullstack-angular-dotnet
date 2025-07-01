@@ -53,9 +53,9 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-            "options": {
-                "proxyConfig": "proxy.conf.json"
-              },
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
@@ -88,8 +88,22 @@
               "src/styles.css"
             ]
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
+  },
+  "cli": {
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   }
 }
