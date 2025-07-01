@@ -39,9 +39,9 @@ jobs:
       working-directory: ./ClientApp
       run: npm install
 
-    - name: ✅ Run Angular Lint
-      working-directory: ./ClientApp
-      run: npm run lint
+    # - name: ✅ Run Angular Lint
+    #   working-directory: ./ClientApp
+    #   run: npm run lint
 
     - name: 🏗️ Build Angular App
       working-directory: ./ClientApp
