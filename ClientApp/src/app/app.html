@@ -1,0 +1,4 @@
+<h1>i m h1 tag</h1>
+<li *ngFor="let product of productService.products()">
+  {{ product.name }} - {{ product.price | currency }}
+</li>
