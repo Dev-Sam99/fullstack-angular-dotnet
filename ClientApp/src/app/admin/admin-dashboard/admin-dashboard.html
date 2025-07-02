@@ -1,0 +1,17 @@
+<div class="p-4 max-w-4xl mx-auto">
+  <h2 class="text-2xl font-bold mb-4">Admin Dashboard</h2>
+
+  <a routerLink="/admin/create" class="bg-green-500 text-white px-4 py-2 rounded mb-4 inline-block">+ New Post</a>
+
+  <div *ngIf="posts.length === 0" class="text-gray-500">No posts available.</div>
+
+  <div *ngFor="let post of posts" class="border p-4 mb-4 rounded shadow">
+    <h3 class="text-xl font-semibold">{{ post.title }}</h3>
+    <p class="text-sm text-gray-600">{{ post.createdAt | date:'medium' }}</p>
+    <p class="mt-2">{{ post.content }}</p>
+    <div class="mt-4 space-x-2">
+      <a [routerLink]="['/admin/edit', post.id]" class="text-blue-500 hover:underline">Edit</a>
+      <button (click)="deletePost(post.id)" class="text-red-500 hover:underline">Delete</button>
+    </div>
+  </div>
+</div>

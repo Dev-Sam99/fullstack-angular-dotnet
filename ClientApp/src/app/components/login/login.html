@@ -1,0 +1,7 @@
+<div class="max-w-sm mx-auto mt-10 p-4 border rounded shadow">
+  <h2 class="text-xl font-bold mb-4">Admin Login</h2>
+  <input type="text" [(ngModel)]="username" placeholder="Username" class="mb-2 p-2 w-full border" />
+  <input type="password" [(ngModel)]="password" placeholder="Password" class="mb-2 p-2 w-full border" />
+  <button (click)="login()" class="bg-blue-500 text-white px-4 py-2 rounded w-full">Login</button>
+  <p *ngIf="error" class="text-red-500 mt-2">{{ error }}</p>
+</div>
