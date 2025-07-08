@@ -1,0 +1,56 @@
+<div #vantaRef class="min-h-screen w-full flex items-center justify-center relative">
+  <div class="bg-white/80 backdrop-blur-lg shadow-2xl border border-gray-300 rounded-2xl p-10 w-full max-w-md relative z-10 transition-transform hover:scale-[1.01] duration-500">
+
+    <!-- Heading -->
+    <h2 class="text-4xl font-extrabold text-center text-gray-800 mb-8 tracking-tight">
+      🔐 Welcome Back
+    </h2>
+
+    <!-- Login Form -->
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="space-y-6">
+
+      <!-- Username Field -->
+      <div class="relative">
+        <input
+          type="text"
+          formControlName="username"
+          placeholder=" "
+          class="peer w-full p-4 pt-6 bg-white text-gray-800 placeholder-transparent rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        />
+        <label
+          class="absolute left-4 top-3 text-sm text-gray-500 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-3 peer-focus:text-sm peer-focus:text-indigo-500 transition-all"
+        >
+          👤 Username
+        </label>
+      </div>
+
+      <!-- Password Field -->
+      <div class="relative">
+        <input
+          type="password"
+          formControlName="password"
+          placeholder=" "
+          class="peer w-full p-4 pt-6 bg-white text-gray-800 placeholder-transparent rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        />
+        <label
+          class="absolute left-4 top-3 text-sm text-gray-500 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-3 peer-focus:text-sm peer-focus:text-indigo-500 transition-all"
+        >
+          🔒 Password
+        </label>
+      </div>
+
+      <!-- Login Button -->
+      <button
+        type="submit"
+        class="w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:to-pink-600 text-white font-semibold py-3 rounded-lg shadow-md hover:shadow-xl transition-all duration-300"
+      >
+        🚀 Login
+      </button>
+
+      <!-- Error Message -->
+      <p *ngIf="error" class="text-red-500 mt-2 text-center text-sm font-medium">
+        {{ error }}
+      </p>
+    </form>
+  </div>
+</div>

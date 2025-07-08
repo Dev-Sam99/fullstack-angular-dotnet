@@ -1,0 +1,20 @@
+/* src/app/components/home/home.component.css */
+#vanta-bg {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  z-index: 0;
+}
+
+#vanta-bg > .relative {
+  position: relative;
+  z-index: 1;
+}
+
+html, body {
+  background-color: #1a202c; /* Tailwind bg-gray-900 */
+  color: #fff; /* Tailwind text-white */
+  height: 100%; /* Tailwind min-h-screen */
+  background-color: grey;
+}

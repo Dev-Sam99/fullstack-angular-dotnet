@@ -1,0 +1,144 @@
+<div id="vanta-bg" class="fixed top-0 left-0 w-full h-full -z-10"></div>
+
+<!-- Actual Page Content -->
+<div class="relative z-10 text-white">
+  <div class="w-full min-h-full  relative text-white">
+
+  <!-- 🔝 Navbar with Login Button -->
+  <nav class="flex justify-between items-center px-6 pt-4">
+    <button
+      routerLink="/login"
+      class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg font-semibold transition">
+      Sign Up / Login
+    </button>
+  </nav>
+
+  <div class="relative z-10 px-4 sm:px-8 pb-16 pt-1">
+    <!-- 💫 Hero Section -->
+    <section class="text-center mb-16">
+      <h1 class="text-5xl sm:text-6xl font-extrabold tracking-tight mb-4">
+        📸 Welcome to Sam’s World
+      </h1>
+      <p class="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto">
+        Explore breathtaking photography and thought-provoking blogs.
+      </p>
+    </section>
+
+    <!-- 🏷️ Categories -->
+    <section class="flex flex-wrap justify-center gap-4 mb-12">
+      <div
+        *ngFor="let tag of ['🌍 Travel', '📷 Photography', '💡 Blog', '🎨 Creative']"
+        class="px-5 py-2 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full cursor-pointer hover:scale-105 hover:shadow-lg transition-all duration-300 ease-in-out text-sm font-medium hover:bg-white/20 hover:text-pink-300"
+      >
+        {{ tag }}
+      </div>
+    </section>
+
+    <!-- 📸 Photography Gallery -->
+    <section class="mb-20">
+      <h2 class="text-3xl font-bold text-white mb-6 text-center">📷 Photography</h2>
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          *ngFor="let post of posts"
+          class="group relative bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden border border-white/20 shadow-xl hover:shadow-2xl transition-transform duration-300 hover:-translate-y-1"
+        >
+          <img
+            [src]="post.imageUrl || 'https://via.placeholder.com/600x400?text=No+Image'"
+            (error)="post.imageUrl = ''"
+            class="h-60 w-full object-cover rounded-t-2xl group-hover:scale-105 transition-transform duration-500"
+            alt="Photography"
+          />
+          <div class="p-4 text-center">
+            <h3 class="text-lg font-semibold text-white truncate">
+              {{ post.title }}
+            </h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 📝 Blog Posts -->
+    <section class="mb-20">
+      <h2 class="text-3xl font-bold text-white mb-6 text-center">📝 Blog Posts</h2>
+
+      <div *ngIf="posts.length === 0" class="text-center text-white/70 text-lg mb-4">
+        No posts found.
+      </div>
+
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          *ngFor="let post of posts"
+          class="group relative bg-white/10 backdrop-blur-md rounded-3xl overflow-hidden border border-white/20 shadow-xl hover:shadow-2xl transition-transform duration-300 hover:-translate-y-1"
+        >
+          <div class="absolute inset-0 rounded-3xl bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 opacity-0 group-hover:opacity-30 transition duration-500 pointer-events-none"></div>
+
+          <img
+            [src]="post.imageUrl || 'https://via.placeholder.com/600x400?text=No+Image'"
+            (error)="post.imageUrl = ''"
+            class="h-52 w-full object-cover rounded-t-3xl group-hover:scale-105 transition-transform duration-500"
+            alt="Blog Image"
+          />
+
+          <div class="p-6 relative z-10">
+            <h2 class="text-2xl font-semibold mb-1 group-hover:text-pink-400 transition">
+              {{ post.title }}
+            </h2>
+            <div class="text-sm text-gray-300 mb-2">
+              {{ post.createdAt | date: 'mediumDate' }}
+            </div>
+
+            <p class="text-sm text-gray-300 mb-4">
+              {{ post.content | slice: 0:120 }}...
+            </p>
+
+            <div class="flex justify-between items-center text-sm text-gray-400">
+              <div class="flex gap-3">
+                <span>❤️ {{ post.likes }}</span>
+                <span>💬 {{ post.comments?.length || 0 }}</span>
+              </div>
+              <a
+                [routerLink]="['/post', post.id]"
+                class="text-pink-300 hover:text-pink-500 font-semibold transition"
+              >
+                Read more →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 📬 Newsletter -->
+    <section class="transition-all duration-500 ease-in-out hover:scale-[1.01]">
+  <div class="mt-20 bg-white/10 backdrop-blur-md rounded-xl p-8 text-center shadow border border-white/20">
+    <h3 class="text-xl text-white font-bold mb-2">📬 Stay in the Loop</h3>
+    <p class="text-white/80 mb-4">Get updates about new posts, right in your inbox.</p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
+      <input
+        type="email"
+        placeholder="Enter your email"
+        class="p-3 rounded-lg w-full sm:w-80 text-sm text-white bg-transparent border border-white/30 placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-400"
+      />
+      <button
+        class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg font-semibold transition"
+      >
+        Subscribe
+      </button>
+    </div>
+  </div>
+    </section>
+
+    <!-- ✍️ About the Author -->
+    <section class="transition-all duration-500 ease-in-out hover:scale-[1.01]">
+      <div class="mt-20 bg-white/10 backdrop-blur-md rounded-xl p-8 text-center shadow border border-white/20">
+        <h3 class="text-xl text-white font-bold mb-2">✍️ About the Author</h3>
+        <p class="text-white/80 max-w-2xl mx-auto">
+          I'm Sam, a passionate storyteller and developer. This blog is where I merge my love for tech and writing. Thanks for reading!
+        </p>
+      </div>
+    </section>
+  </div>
+</div>
+</div>
+
+

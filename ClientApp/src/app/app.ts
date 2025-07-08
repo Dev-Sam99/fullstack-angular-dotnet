@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from './product.service';
 import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './app.html',
-  styleUrls: ['./app.css']
+  imports: [CommonModule,RouterOutlet],
+  template: `<router-outlet></router-outlet>`,
+  styleUrls: ['./app.css'],
+
 })
 export class App implements OnInit {
   constructor(public productService: ProductService) {}

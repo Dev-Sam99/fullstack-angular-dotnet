@@ -1,7 +1,7 @@
-// src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -10,9 +10,17 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   login(username: string, password: string) {
-    return this.http.post<{ token: string }>('/api/auth/login', { username, password });
+    return this.http.post<{ token: string }>('/api/auth/login', { username, password }).pipe(
+      tap(response => {
+        this.saveToken(response.token);
+      })
+    );
   }
-
+decodeToken(token: string): any {
+  if (!token) return null;
+  const payload = token.split('.')[1];
+  return JSON.parse(atob(payload));
+}
   saveToken(token: string) {
     localStorage.setItem(this.tokenKey, token);
   }
@@ -27,6 +35,6 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(this.tokenKey);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/admin/login']);
   }
 }
