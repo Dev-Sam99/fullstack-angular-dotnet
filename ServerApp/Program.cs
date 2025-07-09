@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using ServerApp.Data;
 using ServerApp.Services;
 using ServerApp.Settings;
 using System.Text;
@@ -9,8 +8,8 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // 1. Add DbContext with SQLite
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+// builder.Services.AddDbContext<AppDbContext>(options =>
+//     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // 2. Add controllers
 builder.Services.AddControllers();

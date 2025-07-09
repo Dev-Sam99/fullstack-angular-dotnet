@@ -9,17 +9,22 @@ namespace ServerApp.Controllers
     [Route("api/[controller]")]
     public class PostController : ControllerBase
     {
+        
         private readonly PostService _postService;
 
         public PostController(PostService postService)
         {
+             Console.WriteLine($"Fetched posts from MongoDB1");
+
             _postService = postService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            Console.WriteLine("✅ GetAll() in PostController was called");
             var posts = await _postService.GetAllAsync();
+             Console.WriteLine($"Fetched {posts.Count} posts from MongoDB");
             return Ok(posts);
         }
 
