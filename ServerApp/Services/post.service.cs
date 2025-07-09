@@ -20,20 +20,20 @@ namespace ServerApp.Services
             _posts.Find(_ => true).ToListAsync();
 
         public Task<Post?> GetByIdAsync(string id) =>
-            _posts.Find(p => p.Id == id).FirstOrDefaultAsync();
+            _posts.Find(p => p.id == id).FirstOrDefaultAsync();
 
         public Task CreateAsync(Post post) =>
             _posts.InsertOneAsync(post);
 
         public async Task<bool> UpdateAsync(string id, Post updated)
         {
-            var result = await _posts.ReplaceOneAsync(p => p.Id == id, updated);
+            var result = await _posts.ReplaceOneAsync(p => p.id == id, updated);
             return result.MatchedCount > 0;
         }
 
         public async Task<bool> DeleteAsync(string id)
         {
-            var result = await _posts.DeleteOneAsync(p => p.Id == id);
+            var result = await _posts.DeleteOneAsync(p => p.id == id);
             return result.DeletedCount > 0;
         }
     }

@@ -24,7 +24,8 @@ namespace ServerApp.Controllers
         {
             Console.WriteLine("✅ GetAll() in PostController was called");
             var posts = await _postService.GetAllAsync();
-             Console.WriteLine($"Fetched {posts.Count} posts from MongoDB");
+            Console.WriteLine($"Fetched {posts} posts from MongoDB");
+            Console.WriteLine($"Fetched {posts.Count} posts from MongoDB");
             return Ok(posts);
         }
 

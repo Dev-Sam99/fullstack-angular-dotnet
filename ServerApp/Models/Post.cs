@@ -6,13 +6,13 @@ namespace ServerApp.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public string? id { get; set; }
 
-        public string Title { get; set; }
-        public string Content { get; set; }
-        public string ImageUrl { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public string Likes { get; set; }
-        public List<string> Comments { get; set; } = new();
+        public string? title { get; set; }
+        public string? content { get; set; }
+        public string? imageUrl { get; set; }
+        public DateTime createdAt { get; set; } = DateTime.UtcNow;
+        public string? likes { get; set; }
+        public List<string> comments { get; set; } = new();
     }
 }
