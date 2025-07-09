@@ -3,7 +3,6 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { authGuard } from './guards/auth-guard';
 import { AdminLogin } from './components/admin-login/admin-login';
 import { PostDetailComponent } from './components/post-detail/post-detail';
-import { PostFormComponent } from './components/post-form/post-form';
 import { HomeComponent } from './components/home/home';
 
 export const routes: Routes = [
@@ -15,8 +14,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
     children: [
       { path: '', component: AdminDashboardComponent },
-      { path: 'create', component: PostFormComponent },
-      { path: 'edit/:id', component: PostFormComponent }
+     
     ]
   },
   { path: '**', redirectTo: '' }

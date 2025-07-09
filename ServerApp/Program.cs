@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ServerApp.Data;
+using ServerApp.Services;
+using ServerApp.Settings;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +20,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.AllowAnyOrigin()
+         policy.WithOrigins(
+            "http://localhost:4200", // Angular local dev server
+            "https://fullstack-frontend-8746.onrender.com" // Angular deployed app (optional for later)
+        )
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
@@ -41,7 +46,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 // 5. Swagger (for testing APIs)
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.Configure<MongoDbSettings>(
+    builder.Configuration.GetSection("MongoDbSettings"));
+builder.Services.AddSingleton<PostService>();
 var app = builder.Build();
 
 // Middleware

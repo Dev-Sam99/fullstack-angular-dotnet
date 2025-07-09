@@ -20,7 +20,7 @@ namespace ServerApp.Data
             modelBuilder.Entity<Post>().HasData(
                 new Post
                 {
-                    Id = 1,
+                    Id = "1",
                     Title = "Welcome to the Blog",
                     Content = "This is the first sample post.",
                     ImageUrl = "https://via.placeholder.com/600x300",

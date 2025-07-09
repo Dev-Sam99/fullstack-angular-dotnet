@@ -7,9 +7,10 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { PostService, Post } from '../../post.service';
+import { PostService } from '../../post.service';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Post } from '../../models/post';
 
 declare const VANTA: any;
 declare const THREE: any;
@@ -29,6 +30,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
   ngOnInit(): void {
     this.postService.getPosts().subscribe((data) => {
       this.posts = data;
+      console.log(this.posts);
       this.photographyPosts = data.filter((p) => p.imageUrl);
     });
   }

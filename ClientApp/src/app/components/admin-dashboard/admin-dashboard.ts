@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PostService, Post } from '../../post.service';
+import { PostService } from '../../post.service';
 
 @Component({
   standalone: true,
@@ -18,15 +18,15 @@ export class AdminDashboardComponent {
   imageUrl = '';
 
   createPost() {
-    this.postService.createPost({ title: this.title, content: this.content, imageUrl: this.imageUrl }).subscribe(() => {
-      this.posts$ = this.postService.getPosts(); // refresh
-      this.title = '';
-      this.content = '';
-      this.imageUrl = '';
-    });
+    // this.postService.createPost({ title: this.title, content: this.content, imageUrl: this.imageUrl }).subscribe(() => {
+    //   this.posts$ = this.postService.getPosts(); // refresh
+    //   this.title = '';
+    //   this.content = '';
+    //   this.imageUrl = '';
+    // });
   }
 
-  deletePost(id: number) {
+  deletePost(id: string) {
     this.postService.deletePost(id).subscribe(() => {
       this.posts$ = this.postService.getPosts(); // refresh
     });
