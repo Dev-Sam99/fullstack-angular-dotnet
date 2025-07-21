@@ -7,7 +7,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { PostService } from '../../post.service';
+import { PostService } from '../../services/post.service';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Post } from '../../models/post';
@@ -16,8 +16,9 @@ declare const VANTA: any;
 declare const THREE: any;
 @Component({
   selector: 'app-home',
+  standalone: true, // ✅ Must be here
   templateUrl: './home.html',
-  standalone: true,
+  styleUrls: ['./home.css'],
   imports: [RouterLink, CommonModule],
 })
 export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {

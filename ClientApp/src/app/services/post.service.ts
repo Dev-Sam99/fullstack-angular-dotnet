@@ -1,13 +1,14 @@
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Post } from "./models/post";
+import { Post } from "../models/post";
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
-  private apiUrl = 'https://fullstack-angular-dotnet.onrender.com/api/post'; // Adjust the URL as neede
+   private apiUrl = environment.apiUrl + '/post';
 
   constructor(private http: HttpClient) {}
 

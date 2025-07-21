@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { PostService } from '../../post.service'; // adjust path
+import { PostService } from '../../services/post.service'; // adjust path
 import * as THREE from 'three';
 import FOG from 'vanta/dist/vanta.fog.min';
 import { Post } from '../../models/post';

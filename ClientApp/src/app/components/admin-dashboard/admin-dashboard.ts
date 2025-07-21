@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PostService } from '../../post.service';
+import { PostService } from '../../services/post.service';
 
 @Component({
   standalone: true,

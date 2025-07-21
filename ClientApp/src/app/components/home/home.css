@@ -1,20 +1,25 @@
-/* src/app/components/home/home.component.css */
+/* Ensure Vanta background stays fixed and full screen */
 #vanta-bg {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  min-height: 100vh;
-  overflow-x: hidden;
-  z-index: 0;
+  height: 100%;
+  overflow: hidden;
+  z-index: -10;
 }
 
+/* Optional: Layer content above Vanta */
 #vanta-bg > .relative {
   position: relative;
   z-index: 1;
 }
 
+/* Ensure full height layout */
 html, body {
-  background-color: #1a202c; /* Tailwind bg-gray-900 */
-  color: #fff; /* Tailwind text-white */
-  height: 100%; /* Tailwind min-h-screen */
-  background-color: grey;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #1a202c; /* dark Tailwind gray */
+  color: #fff;
 }

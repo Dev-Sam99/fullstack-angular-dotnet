@@ -14,7 +14,7 @@ import {
   Validators
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../../services/auth.service';
 
 import * as THREE from 'three';
 import CLOUDS from 'vanta/dist/vanta.clouds.min';
