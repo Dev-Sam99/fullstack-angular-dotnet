@@ -4,7 +4,7 @@
 FROM node:20 AS ng-builder
 
 WORKDIR /app
-COPY ./ClientApp ./ClientApp
+COPY ../ClientApp ./ClientApp
 WORKDIR /app/ClientApp
 
 RUN npm install
@@ -25,12 +25,15 @@ RUN dotnet publish -c Release -o /app/publish
 # ===========================
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 
-# ✅ Fix SSL: install CA certs for MongoDB Atlas
+# ✅ Fix SSL: install CA certs and libssl for MongoDB Atlas
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends ca-certificates && \
+    apt-get install -y --no-install-recommends \
+    ca-certificates \
+    libssl3 \
+    curl && \
     rm -rf /var/lib/apt/lists/*
 
-# ✅ Optional: avoid TLS regression issues on some Linux hosts
+# ✅ Optional: avoid TLS regression in .NET 8 with MongoDB
 ENV DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER=0
 
 WORKDIR /app
