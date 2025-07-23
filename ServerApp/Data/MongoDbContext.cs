@@ -1,5 +1,7 @@
 using MongoDB.Driver;
 using ServerApp.Models;
+using System.Net;
+using System.Security.Authentication;
 
 public class MongoDbContext
 {
@@ -7,8 +9,15 @@ public class MongoDbContext
 
     public MongoDbContext(IConfiguration config)
     {
-        var client = new MongoClient(config["MongoDB:ConnectionString"]);
-        _database = client.GetDatabase(config["MongoDB:DatabaseName"]);
+        // Ensure TLS 1.2 is used globally
+        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+        // Use SRV URL and enforce TLS
+        var settings = MongoClientSettings.FromUrl(new MongoUrl(config["MongoDbSettings:ConnectionString"]));
+        settings.SslSettings = new SslSettings { EnabledSslProtocols = SslProtocols.Tls12 };
+
+        var client = new MongoClient(settings);
+        _database = client.GetDatabase(config["MongoDbSettings:DatabaseName"]);
     }
 
     public IMongoCollection<Post> Posts => _database.GetCollection<Post>("posts");

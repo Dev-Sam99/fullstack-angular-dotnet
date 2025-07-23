@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ServerApp.Services;
 using ServerApp.Settings;
 using System.Text;
+using Microsoft.OpenApi.Models;
+System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,15 +43,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 // 4. MongoDB Configuration
 builder.Services.Configure<MongoDbSettings>(
     builder.Configuration.GetSection("MongoDbSettings"));
-builder.Services.AddSingleton<PostService>();
+builder.Services.AddSingleton<MongoDbContext>(); // 👈 Register Mongo context
+builder.Services.AddSingleton<PostService>();    // 👈 Your custom service
 
 // 5. Swagger (for API testing)
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Blog API", Version = "v1" });
+});
 
 var app = builder.Build();
 
-// Global Error Handler (Optional but recommended)
+// Global Error Handler
 app.UseExceptionHandler(errorApp =>
 {
     errorApp.Run(async context =>
@@ -65,7 +70,7 @@ app.UseExceptionHandler(errorApp =>
     });
 });
 
-// Middleware order is important!
+// Middleware order matters!
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
